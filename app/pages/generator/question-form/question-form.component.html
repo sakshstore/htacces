@@ -1,0 +1,425 @@
+<div id="questions" [ngStyle]="{
+    height: elementRef.nativeElement.height + 'px'
+    }">
+  <p>
+    {{"introduction" | transloco}}
+  </p>
+  <div class="alert alert-warning" [ngClass]="{
+      'alert-dark': appService.lastDarkModeActive
+      }">
+    {{"alerts.make a backup" | transloco}}
+  </div>
+
+  <p style="text-align: center;">
+    <b>{{'questions.show description' | transloco}}</b>
+  </p>
+
+  <h4 style="margin-top:40px;">{{"questions.main options.header" | transloco}}</h4>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-10 col-md-10 my-auto">
+          <div class="question">
+            {{"questions.server support.header" | transloco}}
+          </div>
+          <fa-icon [icon]="['far', 'question-circle']" class="question-circle"
+                   (click)="questions.serverSupport.showDescription = !questions.serverSupport.showDescription"
+                   style=""></fa-icon>
+        </div>
+        <div class="col-12 col-md-2 my-auto" style="text-align: center;">
+          <ng-toggle offText="{{'general.no' | transloco}}"
+                     offColor="secondary"
+                     onColor="success"
+                     size="sm"
+                     onText="{{'general.yes' | transloco}}"
+                     [(ngModel)]="questions.serverSupport.checked"
+                     (click)="generateHtaccessFile()"
+          >
+          </ng-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="questions.serverSupport.showDescription"
+         [@fadeInExpandOnEnter] [@fadeOutCollapseOnLeave]>
+      <p class="description" [innerHTML]="'questions.server support.content' | transloco"></p>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-10 col-md-10 my-auto">
+          <div class="question">
+            {{"questions.baseHref.header" | transloco}}
+          </div>
+          <fa-icon [icon]="['far', 'question-circle']" class="question-circle"
+                   (click)="questions.baseHref.showDescription = !questions.baseHref.showDescription"
+                   style=""></fa-icon>
+        </div>
+        <div class="col-12 col-md-2 my-auto" style="text-align: center;">
+          <ng-toggle offText="{{'general.no' | transloco}}"
+                     offColor="secondary"
+                     onColor="success"
+                     size="sm"
+                     onText="{{'general.yes' | transloco}}"
+                     [(ngModel)]="questions.baseHref.checked"
+                     (click)="generateHtaccessFile()"
+          >
+          </ng-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="questions.baseHref.showDescription"
+         [@fadeInExpandOnEnter] [@fadeOutCollapseOnLeave]>
+      <p class="description" [innerHTML]="'questions.baseHref.content' | transloco"></p>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-md-10 my-auto">
+          <div class="question">
+            {{"questions.redirection.header" | transloco}}
+          </div>
+        </div>
+        <div class="col-12 col-md-2 my-auto" style="text-align: center;">
+          <ng-toggle
+            offText="{{'general.no' | transloco}}"
+            offColor="secondary"
+            onColor="success"
+            size="sm"
+            onText="{{'general.yes' | transloco}}"
+            [(ngModel)]="questions.redirection.checked"
+            (click)="generateHtaccessFile()"
+          >
+          </ng-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="questions.redirection.checked"
+         [@fadeInExpandOnEnter]
+         [@fadeOutCollapseOnLeave]>
+
+      <table class="table table-striped" [ngClass]="{
+      'table-dark': appService.lastDarkModeActive
+      }">
+        <tbody>
+        <ng-container *ngFor="let option of questions.redirection.options">
+          <tr>
+            <td>{{"questions.redirection.options." + option.name + ".label" | transloco}}
+              <fa-icon [icon]="['far', 'question-circle']" class="question-circle" *ngIf="option.hasDescription"
+                       (click)="option.showDescription = !option.showDescription">
+              </fa-icon>
+            </td>
+            <td style="vertical-align: middle; text-align: right;">
+              <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input" [attr.id]="option.name" style="position:absolute;"
+                       [(ngModel)]="option.enabled" (change)="generateHtaccessFile()">
+                <label class="form-check-label" [attr.for]="option.name"></label>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="option.hasDescription">
+            <td colspan="2" style="padding-left: 30px;font-size:0.95em;" *ngIf="option.showDescription"
+                [@fadeInExpandOnEnter]
+                [@fadeOutCollapseOnLeave]>
+              {{"questions.redirection.options." + option.name + ".description" | transloco}}
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!--
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-md-10 my-auto">
+          <div class="question">
+            {{"questions.httpsRedirection.header" | transloco}}
+          </div>
+        </div>
+        <div class="col-12 col-md-2 my-auto" style="text-align: center;">
+          <ng-toggle
+            offText="{{'general.no' | transloco}}"
+            offColor="secondary"
+            onColor="success"
+            size="sm"
+            onText="{{'general.yes' | transloco}}"
+            [(ngModel)]="questions.httpsRedirection.checked"
+            (click)="generateHtaccessFile()"
+          >
+          </ng-toggle>
+        </div>
+      </div>
+    </div>
+  </div>
+  -->
+
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-md-10 my-auto">
+          <div class="question">
+            {{"questions.exclusions.header" | transloco}}
+          </div>
+        </div>
+        <div class="col-12 col-md-2 my-auto" style="text-align: center;">
+          <ng-toggle
+            offText="{{'general.no' | transloco}}"
+            offColor="secondary"
+            onColor="success"
+            size="sm"
+            onText="{{'general.yes' | transloco}}"
+            [(ngModel)]="questions.exclusions.checked"
+            (click)="generateHtaccessFile()"
+          >
+          </ng-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="questions.exclusions.checked" [@fadeInExpandOnEnter] [@fadeOutCollapseOnLeave]>
+      <p>
+        {{"questions.exclusions.description" | transloco}}
+      </p>
+      <div style="vertical-align: middle;">
+        <div style="display: block;">
+
+          <ng-container *ngFor="let exlusion of questions.exclusions.list; let i = index;">
+            <div class="exclusion">
+              {{exlusion}}
+              <fa-icon [icon]="['fas', 'trash-alt']"
+                       style="display: inline-block;cursor: pointer; vertical-align: middle; color:red; margin-top:-2px;margin-left:2px;"
+                       (click)="removeExclusion(i)"></fa-icon>
+            </div>
+          </ng-container>
+        </div>
+        <input type="text" placeholder="directory/" style="display:inline;margin-top:2px;"
+               (keyup)="questions.exclusions.addEnabled = inputElement.value.length > 0" #inputElement/>
+        <fa-icon [icon]="['fas', 'plus-square']" size="2x"
+                 style="display: inline-block;cursor: pointer; vertical-align: middle; color:cornflowerblue;margin-top:-2px;margin-left:2px;"
+                 class="op"
+                 (click)="addExclusion(inputElement)" [ngClass]="{
+                  'op-50': !questions.exclusions.addEnabled
+                 }"
+        ></fa-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-md-10 my-auto">
+          <div class="question">
+            {{"questions.browserCaching.header" | transloco}}
+          </div>
+          <fa-icon [icon]="['far', 'question-circle']" class="question-circle"
+                   (click)="questions.browserCachingDisabled.showDescription = !questions.browserCachingDisabled.showDescription"
+                   style=""></fa-icon>
+        </div>
+        <div class="col-12 col-md-2 my-auto" style="text-align: center;">
+          <ng-toggle
+            offText="{{'general.no' | transloco}}"
+            offColor="secondary"
+            onColor="success"
+            size="sm"
+            onText="{{'general.yes' | transloco}}"
+            [(ngModel)]="questions.browserCachingDisabled.checked"
+            (click)="generateHtaccessFile()"
+          >
+          </ng-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="questions.browserCachingDisabled.showDescription" [@fadeInExpandOnEnter]
+         [@fadeOutCollapseOnLeave]>
+      {{"questions.browserCaching.description" | transloco}}
+    </div>
+  </div>
+
+
+  <!-- ADDITIONAL OPTIONS-->
+
+
+  <h4 style="margin-top: 40px;">{{"questions.additional options.header" | transloco}}</h4>
+  <p [innerHTML]="'questions.additional options.description' | transloco"></p>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-md-10 my-auto">
+          <div class="question">
+            {{"questions.allowOrigins.header" | transloco}}
+          </div>
+          <fa-icon [icon]="['far', 'question-circle']" class="question-circle"
+                   (click)="questions.allowOrigins.showDescription = !questions.allowOrigins.showDescription"
+                   style=""></fa-icon>
+        </div>
+        <div class="col-12 col-md-2 my-auto" style="text-align: center;">
+          <ng-toggle
+            offText="{{'general.no' | transloco}}"
+            offColor="secondary"
+            onColor="success"
+            size="sm"
+            onText="{{'general.yes' | transloco}}"
+            [(ngModel)]="questions.allowOrigins.checked"
+            (click)="generateHtaccessFile()"
+          >
+          </ng-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="questions.allowOrigins.checked || questions.allowOrigins.showDescription"
+         [@fadeInExpandOnEnter]
+         [@fadeOutCollapseOnLeave]>
+      <p *ngIf="questions.allowOrigins.showDescription" class="description"
+         [innerHTML]="'questions.allowOrigins.description' | transloco"></p>
+
+      <div style="vertical-align: middle;" *ngIf="questions.allowOrigins.checked">
+        <div style="display: block;">
+
+          <ng-container *ngFor="let domain of questions.allowOrigins.list; let i = index;">
+            <div class="exclusion">
+              {{domain}}
+              <fa-icon [icon]="['fas', 'trash-alt']"
+                       style="display: inline-block;cursor: pointer; vertical-align: middle; color:red; margin-top:-2px;margin-left:2px;"
+                       (click)="removeDomainFromAllowOrigins(i)"></fa-icon>
+            </div>
+          </ng-container>
+        </div>
+        <input type="text" placeholder="example.com" style="display:inline;margin-top:2px;"
+               (keyup)="questions.allowOrigins.addEnabled = inputElement.value.length > 0" #inputElement/>
+        <fa-icon [icon]="['fas', 'plus-square']" size="2x"
+                 style="display: inline-block;cursor: pointer; vertical-align: middle; color:cornflowerblue;margin-top:-2px;margin-left:2px;"
+                 class="op"
+                 (click)="addAllowOriginsDomwain(inputElement)" [ngClass]="{
+                  'op-50': !questions.allowOrigins.addEnabled
+                 }"
+        ></fa-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-md-10 my-auto">
+          <div class="question">
+            {{"questions.security options.header" | transloco}}
+          </div>
+        </div>
+        <div class="col-12 col-md-2 my-auto" style="text-align: center;">
+          <ng-toggle
+            offText="{{'general.no' | transloco}}"
+            offColor="secondary"
+            onColor="success"
+            size="sm"
+            onText="{{'general.yes' | transloco}}"
+            [(ngModel)]="questions.securityOptions.checked"
+            (click)="generateHtaccessFile()"
+          >
+          </ng-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="questions.securityOptions.checked"
+         [@fadeInExpandOnEnter]
+         [@fadeOutCollapseOnLeave]>
+
+      <table class="table table-striped" [ngClass]="{
+      'table-dark': appService.lastDarkModeActive
+      }">
+        <tbody>
+        <ng-container *ngFor="let option of questions.securityOptions.options">
+          <tr>
+            <td>{{"questions.security options." + option.name + ".label" | transloco}}
+              <fa-icon [icon]="['far', 'question-circle']" class="question-circle"
+                       (click)="option.showDescription = !option.showDescription">
+              </fa-icon>
+            </td>
+            <td style="vertical-align: middle; text-align: right;">
+              <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input" [attr.id]="option.name"
+                       [(ngModel)]="option.enabled" (change)="generateHtaccessFile()">
+                <label class="form-check-label" [attr.for]="option.name"></label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding-left: 30px;font-size:0.95em;" *ngIf="option.showDescription"
+                [@fadeInExpandOnEnter]
+                [@fadeOutCollapseOnLeave]>
+              {{"questions.security options." + option.name + ".description" | transloco}}
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-12 col-md-10 my-auto">
+          <div class="question">
+            {{"questions.mimetypes options.header" | transloco}}
+          </div>
+        </div>
+        <div class="col-12 col-md-2 my-auto" style="text-align: center;">
+          <ng-toggle
+            offText="{{'general.no' | transloco}}"
+            offColor="secondary"
+            onColor="success"
+            size="sm"
+            onText="{{'general.yes' | transloco}}"
+            [(ngModel)]="questions.mimeTypes.checked"
+            (click)="generateHtaccessFile()"
+          >
+          </ng-toggle>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" *ngIf="questions.mimeTypes.checked"
+         [@fadeInExpandOnEnter]
+         [@fadeOutCollapseOnLeave]>
+
+      <table class="table table-striped" [ngClass]="{
+      'table-dark': appService.lastDarkModeActive
+      }">
+        <tbody>
+        <ng-container *ngFor="let option of questions.mimeTypes.options">
+          <tr>
+            <td>{{"questions.mimetypes options." + option.name + ".label" | transloco}}
+              <fa-icon [icon]="['far', 'question-circle']" class="question-circle"
+                       (click)="option.showDescription = !option.showDescription">
+              </fa-icon>
+            </td>
+            <td style="vertical-align: middle; text-align: right;">
+              <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input" [attr.id]="option.name"
+                       [(ngModel)]="option.enabled" (change)="generateHtaccessFile()">
+                <label class="form-check-label" [attr.for]="option.name"></label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding-left: 30px;font-size:0.95em;" *ngIf="option.showDescription"
+                [@fadeInExpandOnEnter]
+                [@fadeOutCollapseOnLeave]>
+              {{"questions.mimetypes options." + option.name + ".description" | transloco}}
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div id="terminal">
+  <div id="toolbar-buttons">
+    <div class="header">{{"general.live preview" | transloco}}:</div>
+    <button class="btn btn-outline-dark" (click)="copyToClipBoard()"
+            tooltip="{{'general.copied to clipboard' | transloco}}!"
+            triggers="" #pop="bs-tooltip">
+      <fa-icon [icon]="['far', 'clipboard']"></fa-icon>
+    </button>
+    <a *ngIf="_htaccessFile.blobURL !== null" class="btn btn-success"
+       [href]="_htaccessFile.blobURL" download="htaccess" (click)="downloadClicked = true">
+      <fa-icon [icon]="['fas', 'file-download']"></fa-icon>
+      {{"general.download" | transloco}}</a>
+    <div style="margin-top:20px;" *ngIf="downloadClicked">
+      <alert type="dark"  style="text-align: center;" [type]="(appService.lastDarkModeActive) ? 'dark': 'info'">
+        {{"alerts.rename htaccess" | transloco}}
+      </alert>
+    </div>
+  </div>
+  <div class="preview" style="flex:auto; flex-direction: column; display: flex; height:600px;">
+    <ngx-codejar [(code)]="_htaccessFile.content" [highlightMethod]="highlightMethod" [showLineNumbers]="false"></ngx-codejar>
+  </div>
+</div>

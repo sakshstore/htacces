@@ -1,0 +1,201 @@
+html,body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex:auto;
+  overflow: hidden;
+}
+
+.github-buttons ntkme-github-button {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+span.ng-toggle-handle.btn.btn-sm.btn-light {
+  background-color: lightgray;
+  border: 1px solid lightgray;
+}
+
+#generator-left{
+  padding-right:0;
+}
+
+#generator-right{
+  padding-left: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  p, span, .row, .card-header, .card-body,
+  ul li,
+  ol li,
+  h1, h2, h3, h4,
+  .jumbotron-fluid,
+  #toolbar-buttons * {
+    color: rgb(214, 216, 218);
+  }
+
+  .gh-btn, .gh-btn * {
+    background: gray !important;
+    color: black !important;
+    border: none;
+  }
+
+  .ngx-codejar-editor {
+    background-color: #323232 !important;
+  }
+
+  .social-count.gh-large b,
+  .social-count.gh-large i,
+  .social-count.gh-large span {
+    background-color: transparent;
+    color: black;
+  }
+
+  .alert-info {
+    color: #84e2f2;
+    background-color: #348594;
+    border-color: #348594;
+  }
+
+  .card {
+    background-color: #161c22 !important;
+    color: black !important;
+    border: 1px solid gray;
+  }
+
+  .card-header, #toolbar-buttons {
+    background-color: #161c22 !important;
+    color: black !important;
+    border: 1px solid gray;
+  }
+
+  .jumbotron {
+    background-color: #3e444a !important;
+  }
+
+  #toolbar-buttons {
+    border: none !important;
+    border-bottom: 1px solid gray;
+    background-color: #242424 !important;
+  }
+
+  body {
+    background-color: #0d1117;
+  }
+
+  #questions,
+  #terminal {
+    box-shadow: none !important;
+    border: 1px solid gray !important;
+  }
+
+  #terminal {
+    background-color: #161c22 !important;
+  }
+
+  input[type="text"] {
+    background: black;
+    border: 1px solid rgb(214, 216, 218);
+    color: rgb(214, 216, 218);
+  }
+
+  input[type="text"]::placeholder {
+    color: rgb(167, 166, 166);
+  }
+
+  .exclusion {
+    background-color: black !important;
+    border: 1px solid lightgray !important;
+  }
+
+  .preview textarea {
+    background-color: #1b1c1d !important;
+  }
+
+  .jumbotron.jumbotron-fluid {
+    background-color: #101212;
+  }
+
+  #button-basic {
+    color: white;
+    border: 1px solid gray;
+  }
+
+  .btn-group.form-inline ul {
+    background-color: #343a40;
+    border: 1px solid gray;
+  }
+
+  .btn-group.form-inline ul li a {
+    color: white;
+  }
+
+  .question-circle {
+    color: #348594 !important;
+  }
+}
+
+#terminal {
+  background-color: black;
+}
+
+h2, h3, h4 {
+  margin-top: 50px;
+}
+
+
+@media(max-width: 1200px) {
+  html, body {
+    overflow-y: auto;
+    height: 100%;
+    display: block;
+  }
+  #generator-left{
+    padding-right:15px;
+  }
+
+  #generator-right{
+    padding-left: 15px;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  height: 100%;
+}
+
+ngx-codejar,
+ngx-codejar .codejar-wrap,
+ngx-codejar .ngx-codejar-editor{
+  height:100%;
+}
+
+
+ngx-codejar .codejar-wrap {
+  display: block;
+}
+
+.alert-dark {
+  color: lightblue;
+  background: transparent;
+}
+
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0
+}
+
+.popover-arrow {
+  position: absolute;
+}
+
+.tooltip {
+  position: absolute;
+}
+
+.tooltip-arrow {
+  position: absolute;
+}

@@ -1,0 +1,45 @@
+:host{
+  height:100%;
+}
+
+.question {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.card {
+  margin-bottom: 10px;
+}
+
+#questions {
+  border: 1px lightgray;
+  min-height:100%;
+  padding: 30px;
+}
+
+.op-50 {
+  opacity: 0.5;
+}
+
+.exclusion {
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding: 10px;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.question-circle {
+  display: inline;
+  cursor: pointer;
+  color: darkblue;
+}
+
+.question {
+  display: inline;
+}
+
+.description {
+  font-size: 0.98em;
+}

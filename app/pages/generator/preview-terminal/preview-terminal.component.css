@@ -1,0 +1,47 @@
+:host {
+  height: 100%;
+}
+
+.preview textarea {
+  padding: 10px;
+  background-color: dimgray;
+  color: whitesmoke;
+  height: 100%;
+}
+
+#toolbar-buttons {
+  text-align: right;
+  background-color: #eeecec;
+  border: 1px solid gray;
+  padding: 5px;
+}
+
+#toolbar-buttons > * {
+  margin-left: 5px;
+}
+
+#toolbar-buttons .header {
+  position: absolute;
+  display: block;
+  margin-top: 5px;
+  font-size: 1.2em;
+}
+
+#terminal {
+  border: 1px lightgray;
+  padding: 30px;
+}
+
+#terminal {
+  padding: 0;
+  height: 100%;
+  flex: auto;
+  flex-direction: column;
+  display: flex;
+}
+
+@media (max-width: 1199px) {
+  #terminal {
+    margin-top: 50px;
+  }
+}
